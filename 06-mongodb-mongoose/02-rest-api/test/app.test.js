@@ -84,6 +84,7 @@ describe('mongodb-mongoose/rest-api', () => {
 
     describe('товары', () => {
       describe('получение списка товаров по подкатегории', () => {
+        
         it('если товары есть в базе - должен вернуться массив с товарами', async () => {
           const response = await client.get('http://localhost:3000/api/products');
 
@@ -101,7 +102,6 @@ describe('mongodb-mongoose/rest-api', () => {
               'id должен соответствовать id созданного продукта',
           ).to.have.property('id', product.id);
         });
-
         it('если товаров не найдено - должен возвращаться пустой массив', async () => {
           const response = await client.get('http://localhost:3000/api/products', {
             params: {subcategory: (new ObjectId()).toString()},
@@ -109,6 +109,7 @@ describe('mongodb-mongoose/rest-api', () => {
 
           expect(
               response.data,
+              console.log(JSON.stringify(response.data,null,2)),
               'ответ сервера содержит массив .products'
           ).to.have.property('products').that.is.an('array');
 
@@ -162,6 +163,9 @@ describe('mongodb-mongoose/rest-api', () => {
 
           expect(
               response.data,
+              console.log('response.data ='),
+              console.log(response.data),
+
               'ответ сервера содержит ключ .product'
           ).to.have.property('product');
 

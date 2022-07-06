@@ -1,4 +1,4 @@
-module.exports = function mapProduct(product) {
+function mapProduct(product) {
   return {
     id: product.id,
     title: product.title,
@@ -8,4 +8,12 @@ module.exports = function mapProduct(product) {
     price: product.price,
     description: product.description,
   };
+};
+
+module.exports = function mapResults(productList) {
+  newFormatList = {products:[]};
+  productList.forEach((element, idx) => {
+  newFormatList.products.push(mapProduct(element));
+ });
+ return newFormatList;
 };
